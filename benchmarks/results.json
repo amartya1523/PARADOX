@@ -1,0 +1,175 @@
+{
+  "machine": {
+    "platform": "macOS-26.0-arm64-arm-64bit",
+    "processor": "arm",
+    "python": "3.12.2",
+    "numpy": "2.1.3"
+  },
+  "boot_s": 0.56,
+  "city": {
+    "seed": 7,
+    "intersections": 1024,
+    "road_segments": 1882,
+    "signals": 189,
+    "blocks": 961,
+    "buildings": 50000,
+    "residents": 577085,
+    "electrical_components": 500,
+    "substations": 10,
+    "feeders": 60,
+    "tie_switches": 41,
+    "distribution_transformers": 369,
+    "hospitals": 12,
+    "ems_stations": 18,
+    "ambulances": 18,
+    "dispatch_centres": 2,
+    "telecom_towers": 30,
+    "water_pumps": 20,
+    "critical_facilities": 82,
+    "load_mw": 1027.0
+  },
+  "event_store": {
+    "events": 200000,
+    "event_hash_per_s": 151354,
+    "ingest_events_per_s": 316643,
+    "branch_read_events_per_s": 4182082,
+    "verify_events_per_s": 124225,
+    "verified": true,
+    "branch_own_events": 1000,
+    "objects": 201000
+  },
+  "asof": {
+    "deltas": 200000,
+    "entities": 2000,
+    "rows": [
+      {
+        "K": "none (replay)",
+        "ms_per_query": 8.827,
+        "checkpoints": 0
+      },
+      {
+        "K": 64,
+        "ms_per_query": 0.017,
+        "checkpoints": 3125
+      },
+      {
+        "K": 447,
+        "ms_per_query": 0.041,
+        "checkpoints": 448
+      },
+      {
+        "K": 4096,
+        "ms_per_query": 0.189,
+        "checkpoints": 49
+      },
+      {
+        "K": 32768,
+        "ms_per_query": 1.144,
+        "checkpoints": 7
+      }
+    ]
+  },
+  "hypertable": {
+    "rows": 1725280,
+    "chunks": 8,
+    "ingest_rows_per_s": 19044796,
+    "point_series_ms": 0.014,
+    "narrow_range_ms": 0.005,
+    "chunks_scanned_narrow": 1,
+    "rollup_hourly_ms": 76.8
+  },
+  "counterfactual": [
+    {
+      "intervention": "substation:S3 NEVER FAILS",
+      "full_ms": 36.6,
+      "incremental_ms": 29.8,
+      "speedup": 1.23,
+      "infra_reused": "9/282",
+      "ems_kept": "34/139",
+      "identical_to_full": true
+    },
+    {
+      "intervention": "hospital:H04 GENERATOR STARTS",
+      "full_ms": 39.3,
+      "incremental_ms": 30.9,
+      "speedup": 1.28,
+      "infra_reused": "281/282",
+      "ems_kept": "34/144",
+      "identical_to_full": true
+    },
+    {
+      "intervention": "ALL SIGNALS GET UPS 4",
+      "full_ms": 38.2,
+      "incremental_ms": 31.2,
+      "speedup": 1.22,
+      "infra_reused": "93/282",
+      "ems_kept": "34/144",
+      "identical_to_full": true
+    },
+    {
+      "intervention": "signal UPS on one feeder",
+      "full_ms": 39.7,
+      "incremental_ms": 30.9,
+      "speedup": 1.28,
+      "infra_reused": "279/282",
+      "ems_kept": "34/144",
+      "identical_to_full": true
+    },
+    {
+      "intervention": "ADD 2 AMBULANCES AT E17",
+      "full_ms": 40.2,
+      "incremental_ms": 38.3,
+      "speedup": 1.05,
+      "infra_reused": "282/282",
+      "ems_kept": "0/144",
+      "identical_to_full": true
+    },
+    {
+      "intervention": "SET dark_cap = 0.3",
+      "full_ms": 39.6,
+      "incremental_ms": 39.4,
+      "speedup": 1.0,
+      "infra_reused": "0/282",
+      "ems_kept": "0/144",
+      "identical_to_full": true
+    }
+  ],
+  "crn": [
+    {
+      "intervention": "S3 never fails",
+      "delta_mean": -4.04,
+      "ci95": [
+        -6.08,
+        -2.22
+      ],
+      "variance_reduction": 5.6
+    },
+    {
+      "intervention": "all signals UPS 4h",
+      "delta_mean": -2.36,
+      "ci95": [
+        -3.59,
+        -1.2
+      ],
+      "variance_reduction": 15.6
+    },
+    {
+      "intervention": "+2 ambulances at E17",
+      "delta_mean": -6.63,
+      "ci95": [
+        -8.91,
+        -4.51
+      ],
+      "variance_reduction": 4.1
+    }
+  ],
+  "throughput": {
+    "full_worlds_per_s": 21.9,
+    "road_cache": {
+      "epochs_cached": 283,
+      "hits": 110663,
+      "misses": 283,
+      "hit_rate": 0.997
+    }
+  }
+}
