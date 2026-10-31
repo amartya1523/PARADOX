@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARADOX · what-if database</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header id="top">
+  <div class="brand">
+    <span class="logo">◐</span>
+    <div>
+      <div class="wordmark">PARADOX</div>
+      <div class="tagline">the what-if database of reality</div>
+    </div>
+  </div>
+  <div class="scenario" id="scenario">loading…</div>
+  <div class="branches" id="branches"></div>
+  <label class="split"><input type="checkbox" id="splitToggle"> split view</label>
+</header>
+
+<main>
+  <section id="stage">
+    <div id="maps">
+      <div class="mapwrap" id="wrapA"><canvas id="mapA"></canvas><div class="maplabel" id="labelA">ACTUAL</div></div>
+      <div class="mapwrap hidden" id="wrapB"><canvas id="mapB"></canvas><div class="maplabel alt" id="labelB">ALTERNATE</div></div>
+      <div id="tooltip" class="hidden"></div>
+      <div class="legend">
+        <span><i class="sw lit"></i>powered block</span>
+        <span><i class="sw dark"></i>blacked out</span>
+        <span><i class="dot red"></i>dark signal</span>
+        <span><i class="dot amber"></i>UPS</span>
+        <span><b class="cross g">+</b>hospital</span>
+        <span><b class="cross a">+</b>on generator</span>
+        <span><b class="cross r">+</b>unpowered</span>
+        <span><b class="tri">▲</b>EMS station</span>
+        <span><i class="dot blue"></i>ambulance</span>
+        <span><i class="ring"></i>open incident</span>
+      </div>
+    </div>
+    <div id="scrubber">
+      <button id="play" title="play / pause">▶</button>
+      <div id="clock">18:15</div>
+      <div id="track"><canvas id="ticks"></canvas><input type="range" id="time" min="960" max="1439" step="1" value="1095"></div>
+    </div>
+    <div id="kpis"></div>
+  </section>
+
+  <aside id="panel">
+    <nav id="tabs">
+      <button data-tab="investigate" class="on">Investigate</button>
+      <button data-tab="whatif">What-if</button>
+      <button data-tab="attribute">Attribute</button>
+      <button data-tab="plan">Plan</button>
+      <button data-tab="evidence">Evidence</button>
+      <button data-tab="console">PQL</button>
+      <button data-tab="ledger">Ledger</button>
+    </nav>
+
+    <div class="tab on" id="tab-investigate">
+      <p class="hint">Click anything on the map, or pick a late call. WHY answers come with a causal chain,
+        but-for tests, Chockler–Halpern responsibility and the probability of necessity under two noise couplings.</p>
+      <div id="lateList"></div>
+      <div id="whyOut"></div>
+    </div>
+
+    <div class="tab" id="tab-whatif">
+      <div class="form">
+        <label>Intervention (PQL)</label>
+        <select id="preset">
+          <option>substation:S3 NEVER FAILS</option>
+          <option>hospital:H04 GENERATOR STARTS AFTER 0</option>
+          <option>ALL SIGNALS GET UPS 4</option>
+          <option>ALL FEEDERS GET FLISR</option>
+          <option>substation:S3 REPAIRS IN 90</option>
+          <option>ADD 2 AMBULANCES AT station:E17</option>
+          <option>hospital:H04 GETS MAINTENANCE</option>
+        </select>
+        <input id="ivText" value="substation:S3 NEVER FAILS">
+        <div class="row">
+          <label>runs <select id="runs"><option>12</option><option selected>24</option><option>48</option></select></label>
+          <label>mode <select id="mode"><option value="counterfactual">counterfactual (rung 3)</option><option value="interventional">interventional (rung 2)</option></select></label>
+          <label>tier <select id="tier"><option value="params">MC + parameters</option><option value="mc">MC only</option></select></label>
+          <label><input type="checkbox" id="coupling" checked> coupling band</label>
+        </div>
+        <button class="go" id="runWhatif">Branch reality ⟶</button>
+      </div>
+      <div id="whatifOut"></div>
+    </div>
+
+    <div class="tab" id="tab-attribute">
+      <div class="form row">
+        <select id="attrMetric"></select>
+        <button class="go" id="runAttr">ATTRIBUTE</button>
+      </div>
+      <div id="attrOut"></div>
+    </div>
+
+    <div class="tab" id="tab-plan">
+      <div class="form">
+        <div class="row">
+          <label>reduce <select id="planMetric"></select></label>
+          <label>below <input id="planTarget" value="11" size="4"></label>
+          <label>budget <input id="planBudget" value="60" size="4"></label>
+          <label>using <select id="planUsing"><option value="">any action</option><option value="capital">capital only</option><option value="operational">operational only</option></select></label>
+        </div>
+        <button class="go" id="runPlan">PLAN</button>
+      </div>
+      <div id="planOut"></div>
+    </div>
+
+    <div class="tab" id="tab-evidence">
+      <div class="form">
+        <button class="go" id="runAudit">AUDIT the twin against hidden reality</button>
+        <button class="go ghost" id="runValidate">VALIDATE interval coverage</button>
+        <div class="row">
+          <input id="corrA" value="hospital:H04" size="14"> <span>with</span>
+          <input id="corrB" value="signal:I-16-12" size="14">
+          <button class="go ghost" id="runCorr">CORRELATE</button>
+        </div>
+      </div>
+      <div id="evOut"></div>
+    </div>
+
+    <div class="tab" id="tab-console">
+      <textarea id="pql" rows="3">AS OF 18:40 SHOW DEPENDENTS OF substation:S3 DEPTH 2</textarea>
+      <div class="row"><button class="go" id="runPql">Run ⏎</button><span class="hint">⌘/Ctrl + Enter</span></div>
+      <div id="examples"></div>
+      <pre id="pqlOut"></pre>
+    </div>
+
+    <div class="tab" id="tab-ledger">
+      <div id="ledgerOut"></div>
+    </div>
+  </aside>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
