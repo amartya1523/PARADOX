@@ -15,9 +15,17 @@ and lets you branch reality to ask what would have happened if one thing had bee
 
 <img src="docs/media/paradox-demo.gif" alt="PARADOX demo: a blackout, a WHY query, a branched alternate reality, an audit that finds a hidden dependency" width="100%">
 
-**▶ [Watch the full 1:44 demo (MP4)](docs/media/paradox-demo.mp4)** · [Problem analysis](docs/PROBLEM.md) · [Deep analysis (13 research streams)](docs/ANALYSIS.md) · [Architecture](docs/ARCHITECTURE.md) · [Research & parameters](docs/RESEARCH.md)
+**▶ [Watch the full 1:44 demo video](#-demo-video)** · [Problem analysis](docs/PROBLEM.md) · [Deep analysis (13 research streams)](docs/ANALYSIS.md) · [Architecture](docs/ARCHITECTURE.md) · [Research & parameters](docs/RESEARCH.md)
 
 </div>
+
+## ▶ Demo video
+
+The full 1:44 walkthrough runs a blackout at 18:15, a WHY query, a branched alternate reality in split view, the AUDIT that finds the hidden fuel-pump dependency, a plan, a PQL query and a verified receipt.
+
+https://github.com/user-attachments/assets/beef2049-1ad4-4211-9db1-da0cd19a4dc5
+
+<sub>Can't play it? [Download the MP4](docs/media/paradox-demo.mp4). Re-record it with `scripts/record_demo.cjs`.</sub>
 
 ---
 
