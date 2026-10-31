@@ -27,6 +27,7 @@ def test_causal_ids_propagate_divergence():
 def test_numpy_values_hash_like_python_values():
     assert Event(1, "k", "e", {"v": np.float64(0.5), "n": np.int64(3)}).eid == \
         Event(1, "k", "e", {"v": 0.5, "n": 3}).eid
+    assert Event(1, "k", "e", {"b": np.bool_(False)}).eid == Event(1, "k", "e", {"b": False}).eid
     with pytest.raises(TypeError):
         Event(1, "k", "e", {"v": {1, 2}})
 

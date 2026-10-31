@@ -142,5 +142,5 @@ def compare(px, interventions, metrics=("ems.p90_response",), n: int = 32, mode:
         lo, hi = bootstrap_ci(alt)
         out["coupling"] = {"redrawn_delta_mean": float(alt.mean()), "redrawn_ci95": [lo, hi],
                            "shared_delta_mean": shared,
-                           "sensitive": not (lo <= shared <= hi) or (np.sign(alt.mean()) != np.sign(shared))}
+                           "sensitive": bool(not (lo <= shared <= hi) or (np.sign(alt.mean()) != np.sign(shared)))}
     return out

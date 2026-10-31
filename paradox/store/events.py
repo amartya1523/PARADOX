@@ -47,6 +47,8 @@ def _plain(obj):
     """Coerce to a canonical JSON-able value; reject anything ambiguous."""
     if obj is None or isinstance(obj, (bool, str)):
         return obj
+    if isinstance(obj, np.bool_):
+        return bool(obj)
     if isinstance(obj, (int, np.integer)):
         return int(obj)
     if isinstance(obj, (float, np.floating)):
