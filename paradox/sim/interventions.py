@@ -81,19 +81,21 @@ class Intervention:
 
     def text(self) -> str:
         t, v, x = self.target, self.value, self.extra
-        return {
-            "never_fails": f"{t} NEVER FAILS",
-            "fails_at": f"{t} FAILS AT {hhmm(v or 0)}" + (f" FOR {x:g}" if x else ""),
-            "repairs_in": f"{t} REPAIRS IN {v:g}",
-            "gen_starts": f"{t} GENERATOR STARTS" + (f" AFTER {v:g}" if v else ""),
-            "fuel_backup": f"{t} GETS FUEL BACKUP",
-            "maintenance": f"{t} GETS MAINTENANCE",
-            "flisr": f"{t} GETS FLISR",
-            "ups": f"{t} GETS UPS {v:g}",
-            "battery": f"{t} GETS BATTERY {v:g}",
-            "add_units": f"ADD {int(v or 0)} AMBULANCES AT {t}",
-            "set": f"SET {t} = {v:g}",
-        }.get(self.op, f"{self.op} {t}")
+        num = lambda z: f"{z:g}" if z is not None else ""
+        forms = {
+            "never_fails": lambda: f"{t} NEVER FAILS",
+            "fails_at": lambda: f"{t} FAILS AT {hhmm(v or 0)}" + (f" FOR {num(x)}" if x else ""),
+            "repairs_in": lambda: f"{t} REPAIRS IN {num(v)}",
+            "gen_starts": lambda: f"{t} GENERATOR STARTS" + (f" AFTER {num(v)}" if v else ""),
+            "fuel_backup": lambda: f"{t} GETS FUEL BACKUP",
+            "maintenance": lambda: f"{t} GETS MAINTENANCE",
+            "flisr": lambda: f"{t} GETS FLISR" if t != "*" else "ALL FEEDERS GET FLISR",
+            "ups": lambda: f"{t} GETS UPS {num(v)}" if t != "*" else f"ALL SIGNALS GET UPS {num(v)}",
+            "battery": lambda: f"{t} GETS BATTERY {num(v)}" if t != "*" else f"ALL TOWERS GET BATTERY {num(v)}",
+            "add_units": lambda: f"ADD {int(v or 0)} AMBULANCES AT {t}",
+            "set": lambda: f"SET {t} = {num(v)}",
+        }
+        return forms[self.op]() if self.op in forms else f"{self.op} {t}"
 
     def touches(self, city) -> set[str]:
         t = self.target

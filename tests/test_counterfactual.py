@@ -45,6 +45,17 @@ def test_incremental_equals_full_replay(sim, seed):
         assert inc.kpis == full.kpis, ivs
 
 
+def test_incremental_from_record_under_posterior_noise(sim):
+    """Posterior replicates may reuse the factual world; the result must not change."""
+    base = sim.run(noise=9)
+    for rep in range(3):
+        for ivs in ([I("never_fails", "substation:S3")], [I("maintenance", "hospital:H04")],
+                    [I("ups", "*", 4), I("flisr", "*")]):
+            inc = sim.run(ivs, noise=Posterior(base.noise, rep), base=base)
+            full = sim.run(ivs, noise=Posterior(base.noise, rep))
+            assert inc.stats["incremental"] and inc.head() == full.head()
+
+
 def test_incremental_actually_reuses_work(sim):
     base = sim.run(noise=0)
     cf = sim.run([I("ups", "signal:I-00-00" if "I-00-00" in sim.city.signals else

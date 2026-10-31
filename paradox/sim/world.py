@@ -33,6 +33,20 @@ def noise_key(noise: NoiseTape) -> tuple:
     return ("tape", noise.seed)
 
 
+def compatible(base_noise: NoiseTape, noise: NoiseTape) -> bool:
+    """Can a world computed under ``base_noise`` be reused under ``noise``?
+
+    Same key, or ``noise`` is a shared-coupling posterior *of* the baseline's
+    tape: the posterior reproduces every value the baseline observed, so any
+    computation the baseline did is exactly what the posterior would do.
+    """
+    if noise_key(base_noise) == noise_key(noise):
+        return True
+    return (isinstance(noise, Posterior) and not isinstance(base_noise, Posterior)
+            and not noise.fresh_mechanisms and noise._points is base_noise.points
+            and noise.seed == base_noise.seed)
+
+
 @dataclass
 class World:
     scenario: Scenario
@@ -86,7 +100,7 @@ class Simulator:
 
         touched: set = set()
         if base is not None:
-            if base.scenario != sc or base.params != p or noise_key(base.noise) != noise_key(noise):
+            if base.scenario != sc or base.params != p or not compatible(base.noise, noise):
                 base = None
             else:
                 for iv in set(ivs) ^ set(base.interventions):
@@ -157,7 +171,7 @@ class Simulator:
         k["telecom.tower_hours"] = sum(inf.value(f"tower:{t['id']}").total(t0, t1) for t in city.towers) / 60.0
         k["water.zone_hours"] = sum(inf.value(f"zone:{z['id']}").total(t0, t1) for z in city.zones) / 60.0
         k["dispatch.down_min"] = sum(inf.value(f"dispatch:{d['id']}").total(t0, t1) for d in city.dispatch)
-        return {key: round(v, 4) for key, v in k.items()}
+        return {key: round(float(v), 4) for key, v in k.items()}
 
 
 KPI_INFO = {
