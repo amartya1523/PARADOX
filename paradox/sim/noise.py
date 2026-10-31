@@ -74,6 +74,39 @@ class NoiseTape:
         self.points: dict[Address, float] = {}
         self.intervals: dict[Address, tuple[float, float]] = {}
         self.forced: dict[Address, float] = {}
+        self.constraints: dict[Address, tuple[float, float]] = {}
+        self._scopes: list[dict] = []
+
+    def constrain(self, lo: float, hi: float, *addr) -> None:
+        """Observed evidence: the draw at ``addr`` is known to lie in [lo, hi).
+
+        The raw uniform is mapped into the interval, so the world is consistent
+        with the evidence while keeping the in-interval value uncertain.
+        """
+        self.constraints[addr] = (lo, hi)
+
+    # -- scopes: lets a reused SCM node hand its observations to a new tape ----
+    def begin_scope(self) -> None:
+        self._scopes.append({})
+
+    def end_scope(self) -> dict:
+        rec = self._scopes.pop()
+        if self._scopes:
+            self._scopes[-1].update(rec)
+        return rec
+
+    def absorb(self, rec: dict) -> None:
+        """Replay the observations of a reused computation into this tape."""
+        if not self.record:
+            return
+        for addr, obs in rec.items():
+            if obs[0] == "p":
+                self.points[addr] = obs[1]
+                self.intervals.pop(addr, None)
+            elif addr not in self.points:
+                self.intervals[addr] = (obs[1], obs[2])
+        if self._scopes:
+            self._scopes[-1].update(rec)
 
     # the only source of raw uniforms; subclasses change this
     def _base(self, addr: Address) -> float:
@@ -82,7 +115,11 @@ class NoiseTape:
     def _value(self, addr: Address) -> float:
         if addr in self.forced:
             return self.forced[addr]
-        return self._base(addr)
+        v = self._base(addr)
+        c = self.constraints.get(addr)
+        if c is not None and not (c[0] <= v < c[1]):
+            v = c[0] + (c[1] - c[0]) * _to_unit(address_hash(self.seed, addr, b"constraint"))
+        return v
 
     # -- primitive draws ------------------------------------------------------
     def u(self, *addr) -> float:
@@ -90,6 +127,8 @@ class NoiseTape:
         if self.record:
             self.points[addr] = v
             self.intervals.pop(addr, None)
+        if self._scopes:
+            self._scopes[-1][addr] = ("p", v)
         return v
 
     def below(self, p: float, *addr) -> bool:
@@ -102,6 +141,8 @@ class NoiseTape:
                 plo, phi = self.intervals[addr]
                 lo, hi = max(lo, plo), min(hi, phi)
             self.intervals[addr] = (lo, hi)
+        if self._scopes and addr not in self.points:
+            self._scopes[-1][addr] = ("i",) + self.intervals.get(addr, (0.0, p) if hit else (p, 1.0))
         return hit
 
     # -- transforms -----------------------------------------------------------
@@ -171,6 +212,7 @@ class Posterior(NoiseTape):
         self._points = factual.points
         self._intervals = factual.intervals
         self.forced = dict(factual.forced)
+        self.constraints = dict(factual.constraints)
         self.fresh_mechanisms = frozenset(fresh_mechanisms)
         self._salt = struct.pack("<q", self.rep) + b"posterior"
 
