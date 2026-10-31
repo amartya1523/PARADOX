@@ -1,0 +1,834 @@
+{
+ "hidden_structure": {
+  "hospital": "H04",
+  "fuel_feeder": "F3-6",
+  "description": "fuel transfer pump on the normal bus instead of the emergency bus",
+  "true_params": {
+   "p_fts": 0.1,
+   "dark_cap": 0.33,
+   "spillback": 0.5,
+   "crash_rate_dark_per_h": 0.09
+  }
+ },
+ "rows": [
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S1 NEVER FAILS",
+   "true_delta": -0.111,
+   "twin_point": -0.471,
+   "twin_interval": [
+    -1.48,
+    -0.089
+   ],
+   "covered": true,
+   "abs_error": 0.36
+  },
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -0.39,
+   "twin_point": -0.33,
+   "twin_interval": [
+    -0.73,
+    0.169
+   ],
+   "covered": true,
+   "abs_error": 0.06
+  },
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S1 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-0: S1 at 19:33",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S2 NEVER FAILS",
+   "true_delta": -3.458,
+   "twin_point": -0.037,
+   "twin_interval": [
+    -10.836,
+    0.03
+   ],
+   "covered": true,
+   "abs_error": 3.421
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    -1.41,
+    0.03
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -3.816,
+   "twin_point": -0.884,
+   "twin_interval": [
+    -11.84,
+    -0.312
+   ],
+   "covered": true,
+   "abs_error": 2.932
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S2 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-1: S2 at 18:32",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S3 NEVER FAILS",
+   "true_delta": -1.42,
+   "twin_point": -1.534,
+   "twin_interval": [
+    -2.3,
+    -0.253
+   ],
+   "covered": true,
+   "abs_error": 0.114
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    -0.414,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -0.894,
+   "twin_point": -0.98,
+   "twin_interval": [
+    -1.791,
+    -1.034
+   ],
+   "covered": false,
+   "abs_error": 0.086
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S3 NEVER FAILS",
+   "true_delta": -158.17,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": false,
+   "abs_error": 158.17
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": -4.81,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": false,
+   "abs_error": 4.81
+  },
+  {
+   "scenario": "oracle-2: S3 at 17:55",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S4 NEVER FAILS",
+   "true_delta": -7.978,
+   "twin_point": -17.858,
+   "twin_interval": [
+    -9.275,
+    -1.375
+   ],
+   "covered": true,
+   "abs_error": 9.88
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    -0.927,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -6.48,
+   "twin_point": -14.11,
+   "twin_interval": [
+    -7.851,
+    -2.194
+   ],
+   "covered": true,
+   "abs_error": 7.63
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S4 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-3: S4 at 17:13",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S5 NEVER FAILS",
+   "true_delta": -1.339,
+   "twin_point": -0.393,
+   "twin_interval": [
+    -2.084,
+    -0.549
+   ],
+   "covered": true,
+   "abs_error": 0.946
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -1.85,
+   "twin_point": -1.17,
+   "twin_interval": [
+    -2.35,
+    -1.025
+   ],
+   "covered": true,
+   "abs_error": 0.68
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S5 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-4: S5 at 17:31",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S6 NEVER FAILS",
+   "true_delta": -4.729,
+   "twin_point": -7.902,
+   "twin_interval": [
+    -4.941,
+    -1.248
+   ],
+   "covered": true,
+   "abs_error": 3.173
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    -1.422,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -10.003,
+   "twin_point": -11.41,
+   "twin_interval": [
+    -15.854,
+    -4.33
+   ],
+   "covered": true,
+   "abs_error": 1.407
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S6 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-5: S6 at 18:56",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S7 NEVER FAILS",
+   "true_delta": -0.189,
+   "twin_point": -0.189,
+   "twin_interval": [
+    -2.589,
+    0.103
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": -0.117,
+   "twin_point": -0.132,
+   "twin_interval": [
+    -2.523,
+    0.164
+   ],
+   "covered": true,
+   "abs_error": 0.015
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -1.932,
+   "twin_point": -1.932,
+   "twin_interval": [
+    -6.384,
+    -1.053
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S7 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-6: S7 at 18:30",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S8 NEVER FAILS",
+   "true_delta": -0.56,
+   "twin_point": -0.43,
+   "twin_interval": [
+    -0.751,
+    -0.089
+   ],
+   "covered": true,
+   "abs_error": 0.13
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.19,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.352
+   ],
+   "covered": true,
+   "abs_error": 0.19
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -1.294,
+   "twin_point": -1.312,
+   "twin_interval": [
+    -2.321,
+    -0.532
+   ],
+   "covered": true,
+   "abs_error": 0.018
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S8 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-7: S8 at 19:54",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S9 NEVER FAILS",
+   "true_delta": -2.46,
+   "twin_point": -3.138,
+   "twin_interval": [
+    -2.67,
+    -0.161
+   ],
+   "covered": true,
+   "abs_error": 0.678
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": -0.725,
+   "twin_point": 0.604,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": false,
+   "abs_error": 1.329
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -4.915,
+   "twin_point": -5.1,
+   "twin_interval": [
+    -9.053,
+    -1.575
+   ],
+   "covered": true,
+   "abs_error": 0.185
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S9 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-8: S9 at 18:53",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "ems.p90_response",
+   "intervention": "substation:S10 NEVER FAILS",
+   "true_delta": -2.047,
+   "twin_point": -0.502,
+   "twin_interval": [
+    -2.134,
+    -0.425
+   ],
+   "covered": true,
+   "abs_error": 1.545
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "ems.p90_response",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.005,
+   "twin_point": 0.0,
+   "twin_interval": [
+    -0.847,
+    0.0
+   ],
+   "covered": false,
+   "abs_error": 0.005
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "ems.p90_response",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": -1.95,
+   "twin_point": -1.27,
+   "twin_interval": [
+    -2.686,
+    -0.241
+   ],
+   "covered": true,
+   "abs_error": 0.68
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "hospital.unpowered_min",
+   "intervention": "substation:S10 NEVER FAILS",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ALL FEEDERS GET FLISR",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  },
+  {
+   "scenario": "oracle-9: S10 at 18:40",
+   "metric": "hospital.unpowered_min",
+   "intervention": "ADD 2 AMBULANCES AT station:E01",
+   "true_delta": 0.0,
+   "twin_point": 0.0,
+   "twin_interval": [
+    0.0,
+    0.0
+   ],
+   "covered": true,
+   "abs_error": 0.0
+  }
+ ],
+ "by_metric": {
+  "ems.p90_response": {
+   "cases": 30,
+   "coverage_90": 0.9,
+   "mean_abs_error": 1.182,
+   "worst": {
+    "scenario": "oracle-3: S4 at 17:13",
+    "metric": "ems.p90_response",
+    "intervention": "substation:S4 NEVER FAILS",
+    "true_delta": -7.978,
+    "twin_point": -17.858,
+    "twin_interval": [
+     -9.275,
+     -1.375
+    ],
+    "covered": true,
+    "abs_error": 9.88
+   }
+  },
+  "hospital.unpowered_min": {
+   "cases": 30,
+   "coverage_90": 0.933,
+   "mean_abs_error": 5.433,
+   "worst": {
+    "scenario": "oracle-2: S3 at 17:55",
+    "metric": "hospital.unpowered_min",
+    "intervention": "substation:S3 NEVER FAILS",
+    "true_delta": -158.17,
+    "twin_point": 0.0,
+    "twin_interval": [
+     0.0,
+     0.0
+    ],
+    "covered": false,
+    "abs_error": 158.17
+   }
+  }
+ },
+ "verdict": "intervals approximately calibrated against the oracle"
+}
