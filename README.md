@@ -23,7 +23,7 @@ and lets you branch reality to ask what would have happened if one thing had bee
 
 The full 1:44 walkthrough runs a blackout at 18:15, a WHY query, a branched alternate reality in split view, the AUDIT that finds the hidden fuel-pump dependency, a plan, a PQL query and a verified receipt.
 
-https://github.com/user-attachments/assets/beef2049-1ad4-4211-9db1-da0cd19a4dc5
+https://github.com/user-attachments/assets/ccb4e423-afef-47b2-81ec-10c58df4f6d7
 
 <sub>Can't play it? [Download the MP4](docs/media/paradox-demo.mp4). Re-record it with `scripts/record_demo.cjs`.</sub>
 
