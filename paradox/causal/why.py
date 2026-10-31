@@ -161,9 +161,12 @@ def why_entity(px, entity: str, branch: str = "main") -> dict:
                 "narrative": f"{entity} never entered a bad state on {branch}."
                              + (f" Protective events: {', '.join(sorted({e.kind for e in good}))}." if good else ""),
                 "events": [e.to_dict() for e in events[:40]]}
-    first = bad[0]
+    worst = ["hospital.unpowered", "hospital.diversion_on", "dispatch.down", "gen.fuel_exhausted",
+             "zone.depressurized", "tower.battery_depleted", "signal.dark", "tie.blocked", "feeder.down", "power.lost"]
+    rank = {k: i for i, k in enumerate(worst)}
+    first = min(bad, key=lambda e: (rank.get(e.kind, len(worst)), e.t))
     prov = provenance(px, branch, first.eid)
-    chain = sorted(prov["nodes"], key=lambda n: n["t"])
+    chain = sorted(prov["nodes"], key=lambda n: (n["t"], -n["depth"]))
     text = f"{entity}: {first.kind} at {_clock(first.t)}. Causal chain: " + " → ".join(
         f"{n['kind']} {n['entity']} ({n['clock']}, {n['class']})" for n in chain)
     return {"target": entity, "branch": branch, "bad": True, "first": first.to_dict(), "provenance": prov,
