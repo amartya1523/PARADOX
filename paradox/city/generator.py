@@ -107,7 +107,7 @@ def _kmeans(xy: np.ndarray, w: np.ndarray, k: int, rng, iters: int = 30) -> tupl
     return cent, d.argmin(1)
 
 
-def generate_city(seed: int = 7, G: int = 32, spacing: float = 220.0, n_buildings: int = 50_000,
+def generate_city(seed: int = 7, G: int = 32, spacing: float = 300.0, n_buildings: int = 50_000,
                   n_substations: int = 10, feeders_per_sub: int = 6, n_hospitals: int = 12,
                   n_stations: int = 18, n_ambulances: int = 26, n_towers: int = 30,
                   n_pumps: int = 20) -> City:
@@ -148,7 +148,7 @@ def generate_city(seed: int = 7, G: int = 32, spacing: float = 220.0, n_building
         cls += [int(art), int(art)]
     arc_src, arc_dst, arc_cls = np.array(src, np.int32), np.array(dst, np.int32), np.array(cls, np.int8)
     arc_len = np.linalg.norm(node_xy[arc_src] - node_xy[arc_dst], axis=1)
-    arc_speed = np.where(arc_cls == 1, 50.0, 30.0)
+    arc_speed = np.where(arc_cls == 1, 40.0, 24.0)  # effective urban speeds
     arc_cap = np.where(arc_cls == 1, 1800.0, 900.0)
     bridges = [(nid(river_row, c), nid(river_row + 1, c)) for c in bridge_cols]
 
@@ -162,7 +162,7 @@ def generate_city(seed: int = 7, G: int = 32, spacing: float = 220.0, n_building
     dist_c = np.linalg.norm(block_xy - centre, axis=1)
     river_y = node_xy[nid(river_row, 0), 1] + spacing / 2
     on_river = np.abs(block_xy[:, 1] - river_y) < spacing * 0.6
-    weight = np.exp(-dist_c / 2400.0) + 0.25
+    weight = np.exp(-dist_c / 3200.0) + 0.25
     weight[on_river] *= 0.15
     bldg_block = rng.choice(B, size=n_buildings, p=weight / weight.sum()).astype(np.int32)
     kind = rng.choice(4, size=n_buildings, p=[0.80, 0.15, 0.04, 0.01]).astype(np.int8)
