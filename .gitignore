@@ -13,3 +13,4 @@ venv/
 /out/
 /scratch/
 node_modules/
+.claude/
