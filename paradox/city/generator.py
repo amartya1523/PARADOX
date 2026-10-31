@@ -107,9 +107,9 @@ def _kmeans(xy: np.ndarray, w: np.ndarray, k: int, rng, iters: int = 30) -> tupl
     return cent, d.argmin(1)
 
 
-def generate_city(seed: int = 7, G: int = 32, spacing: float = 300.0, n_buildings: int = 50_000,
+def generate_city(seed: int = 7, G: int = 32, spacing: float = 360.0, n_buildings: int = 50_000,
                   n_substations: int = 10, feeders_per_sub: int = 6, n_hospitals: int = 12,
-                  n_stations: int = 18, n_ambulances: int = 26, n_towers: int = 30,
+                  n_stations: int = 18, n_ambulances: int = 18, n_towers: int = 30,
                   n_pumps: int = 20) -> City:
     rng = np.random.default_rng(seed)
 
@@ -173,12 +173,26 @@ def generate_city(seed: int = 7, G: int = 32, spacing: float = 300.0, n_building
     block_kw = np.bincount(bldg_block, weights=kw, minlength=B)
     block_cell = ((br // 4) * 8 + (bc // 4)).astype(np.int32)
 
+    def place(k, w):
+        cent, _ = _kmeans(block_xy, w, k, rng)
+        used, out = set(), []
+        for c in cent:
+            d = np.linalg.norm(block_xy - c, axis=1)
+            for b in np.argsort(d):
+                if int(b) not in used and not on_river[b]:
+                    used.add(int(b))
+                    out.append(int(b))
+                    break
+        return out
+
+    hosp_blocks = place(n_hospitals, block_pop + 1)
+
     # -- power: substations, feeders, transformers, ties --------------------
     sub_xy, block_sub = _kmeans(block_xy, block_kw + 1, n_substations, rng)
-    # the substation feeding the most people becomes S3: the scenario's fault
+    # the substation serving the most hospitals (then people) becomes S3: the scenario's fault
     pop_by_sub = np.bincount(block_sub, weights=block_pop, minlength=n_substations)
-    order = list(np.argsort(-pop_by_sub))
-    critical = order.pop(0)
+    hosp_by_sub = np.bincount(block_sub[hosp_blocks], minlength=n_substations)
+    critical = int(np.lexsort((-pop_by_sub, -hosp_by_sub))[0])
     rest = [i for i in range(n_substations) if i != critical]
     ids = rest[:2] + [critical] + rest[2:]
     remap = {old: new for new, old in enumerate(ids)}
@@ -255,23 +269,11 @@ def generate_city(seed: int = 7, G: int = 32, spacing: float = 300.0, n_building
                       "blocks": np.flatnonzero(block_zone == z).tolist()})
 
     # -- facilities ---------------------------------------------------------
-    def place(k, w):
-        cent, _ = _kmeans(block_xy, w, k, rng)
-        used, out = set(), []
-        for c in cent:
-            d = np.linalg.norm(block_xy - c, axis=1)
-            for b in np.argsort(d):
-                if int(b) not in used and not on_river[b]:
-                    used.add(int(b))
-                    out.append(int(b))
-                    break
-        return out
-
     hospitals = []
-    for i, b in enumerate(place(n_hospitals, block_pop + 1)):
+    for i, b in enumerate(hosp_blocks):
         f = block_feeder[b]
         feeds = [feeders[f]["id"]]
-        if i % 4 == 1 and feeders[f]["ties"]:  # a few hospitals have a second utility feed
+        if i % 4 == 1 and feeders[f]["ties"] and feeders[f]["sub"] != "S3":  # a few hospitals have a second utility feed
             t = next(t for t in ties if t["id"] == feeders[f]["ties"][0])
             feeds.append(t["b"] if t["a"] == feeders[f]["id"] else t["a"])
         hospitals.append({"id": f"H{i + 1:02d}", "block": b, "node": int(block_node[b]),
@@ -280,7 +282,7 @@ def generate_city(seed: int = 7, G: int = 32, spacing: float = 300.0, n_building
                           "beds": int(rng.integers(20, 60))})
     stations = []
     st_blocks = place(n_stations, block_pop + 1)
-    extra = set(rng.choice(n_stations, size=n_ambulances - n_stations, replace=False).tolist())
+    extra = set(rng.choice(n_stations, size=max(0, n_ambulances - n_stations), replace=False).tolist())
     for i, b in enumerate(st_blocks):
         stations.append({"id": f"E{i + 1:02d}", "block": b, "node": int(block_node[b]),
                          "feeder": feeders[block_feeder[b]]["id"], "units": 2 if i in extra else 1})

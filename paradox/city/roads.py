@@ -60,6 +60,12 @@ class RoadNet:
             dark[list(dark_nodes)] = True
         into_dark = dark[self.dst]
         vc_eff = np.where(into_dark, vc / p["dark_cap"], vc)
+        if dark_nodes:
+            # queues back up from a dark intersection onto the links that feed its approaches
+            feeding = np.zeros(self.n, bool)
+            feeding[self.src[into_dark]] = True
+            spill = feeding[self.dst] & ~into_dark
+            vc_eff = np.where(spill, vc_eff * (1.0 + p["spillback"]), vc_eff)
         x = np.minimum(vc_eff, p["vc_cap"])
         bpr = 1.0 + p["bpr_alpha"] * x ** p["bpr_beta"]
         k_ev = 1.0 + p["ev_gain"] * np.maximum(0.0, 1.0 - x)
@@ -72,7 +78,7 @@ class RoadNet:
         h.update(np.array(sorted(dark_nodes), np.int32).tobytes())
         h.update(str(int(t // self.TOD_BIN)).encode())
         h.update(repr(tuple(p[k] for k in ("dark_cap", "vc_cap", "bpr_alpha", "bpr_beta",
-                                             "ev_gain", "dark_delay"))).encode())
+                                             "ev_gain", "dark_delay", "spillback"))).encode())
         return h.hexdigest()
 
     def tables(self, dark_nodes: frozenset, t: float, p: dict) -> dict:
