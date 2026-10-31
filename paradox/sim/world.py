@@ -30,7 +30,7 @@ from .params import defaults
 def noise_key(noise: NoiseTape) -> tuple:
     if isinstance(noise, Posterior):
         return ("posterior", noise.seed, noise.rep, tuple(sorted(noise.fresh_mechanisms)), id(noise._points))
-    return ("tape", noise.seed)
+    return ("tape", noise.seed, tuple(sorted(noise.constraints.items())), tuple(sorted(noise.forced.items())))
 
 
 def compatible(base_noise: NoiseTape, noise: NoiseTape) -> bool:

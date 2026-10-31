@@ -183,6 +183,14 @@ class NoiseTape:
             raise ValueError("forced uniforms must lie strictly inside (0, 1)")
         self.forced[addr] = value
 
+    def fork_same(self) -> "NoiseTape":
+        """Same luck, separate tape: for counterfactual runs that must not write
+        their draws back into the factual record (which abduction reads)."""
+        t = NoiseTape(self.seed, self.record)
+        t.constraints = dict(self.constraints)
+        t.forced = dict(self.forced)
+        return t
+
     def observations(self) -> dict:
         return {"points": dict(self.points), "intervals": dict(self.intervals)}
 

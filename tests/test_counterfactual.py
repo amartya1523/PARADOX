@@ -56,6 +56,14 @@ def test_incremental_from_record_under_posterior_noise(sim):
             assert inc.stats["incremental"] and inc.head() == full.head()
 
 
+def test_counterfactual_runs_do_not_touch_the_factual_record(sim):
+    w = sim.run(noise=12)
+    before = (dict(w.noise.points), dict(w.noise.intervals))
+    sim.run([I("never_fails", "substation:S3")], noise=w.noise.fork_same(), base=w)
+    sim.run([I("maintenance", "hospital:H04")], noise=Posterior(w.noise, 0), base=w)
+    assert (w.noise.points, w.noise.intervals) == before
+
+
 def test_incremental_actually_reuses_work(sim):
     base = sim.run(noise=0)
     cf = sim.run([I("ups", "signal:I-00-00" if "I-00-00" in sim.city.signals else

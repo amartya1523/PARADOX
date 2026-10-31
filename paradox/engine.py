@@ -59,7 +59,7 @@ class Paradox:
 
     def counterfactual(self, interventions, noise=None) -> World:
         """One rung-3 world: the record's luck, the intervention's change."""
-        return self.sim.run(interventions, noise=noise or self.actual.noise, base=self.actual)
+        return self.sim.run(interventions, noise=noise or self.actual.noise.fork_same(), base=self.actual)
 
     def branch_name(self, interventions) -> str:
         base = "-".join(iv.text().lower().replace(":", "").replace(" ", "_") for iv in interventions)[:48]
