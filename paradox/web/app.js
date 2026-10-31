@@ -55,6 +55,7 @@ async function selectAlt(name) {
   S.split = !!name;
   $("splitToggle").checked = S.split;
   $("wrapB").classList.toggle("hidden", !S.split);
+  $("maps").classList.toggle("split", S.split);
   $("labelB").textContent = name ? `ALTERNATE · ${name}` : "ALTERNATE";
   S.meta.branches = await api("/api/branches");
   renderBranches(S.meta.branches);

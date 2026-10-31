@@ -6,7 +6,8 @@
   --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 13px/1.45 var(--sans); }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 13px/1.45 var(--sans); overflow: hidden; }
+body { display: flex; flex-direction: column; }
 .hidden { display: none !important; }
 header#top { display: flex; align-items: center; gap: 18px; padding: 10px 16px; border-bottom: 1px solid var(--line);
   background: linear-gradient(180deg, #0d121b, #090c12); }
@@ -14,7 +15,9 @@ header#top { display: flex; align-items: center; gap: 18px; padding: 10px 16px; 
 .logo { font-size: 26px; color: var(--amber); text-shadow: 0 0 18px rgba(255,181,71,.5); }
 .wordmark { font: 700 17px/1 var(--mono); letter-spacing: .32em; }
 .tagline { color: var(--muted); font-size: 11px; letter-spacing: .04em; }
-.scenario { color: var(--muted); font-family: var(--mono); font-size: 11.5px; border-left: 1px solid var(--line); padding-left: 16px; }
+.scenario { color: var(--muted); font-family: var(--mono); font-size: 11.5px; border-left: 1px solid var(--line); padding-left: 16px;
+  max-height: 34px; overflow: hidden; }
+#maps.split .legend { display: none; }
 .scenario b { color: var(--amber); font-weight: 600; }
 .branches { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
 .chip { font: 11px var(--mono); padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg2);
@@ -24,7 +27,7 @@ header#top { display: flex; align-items: center; gap: 18px; padding: 10px 16px; 
 .chip small { opacity: .6; margin-left: 6px; }
 .split { color: var(--muted); font-size: 12px; user-select: none; }
 
-main { display: grid; grid-template-columns: minmax(0, 1fr) 470px; height: calc(100% - 55px); }
+main { display: grid; grid-template-columns: minmax(0, 1fr) 470px; flex: 1; min-height: 0; }
 #stage { display: flex; flex-direction: column; min-width: 0; border-right: 1px solid var(--line); }
 #maps { position: relative; flex: 1; display: flex; gap: 2px; min-height: 0; background: #05070b; }
 .mapwrap { position: relative; flex: 1; min-width: 0; }
